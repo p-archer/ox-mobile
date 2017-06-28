@@ -5,6 +5,8 @@ const fs = require('fs');
 
 const Templates = {
 	body: 'templates/main.html',
+	css: 'templates/main.css',
+	js: 'templates/main.js'
 };
 
 main(process.argv);
@@ -15,7 +17,6 @@ function main(args) {
 		throw 'no input file specified';
 	}
 
-	let template = fs.readFileSync(Templates.body, 'utf-8');
 	let inputData = fs.readFileSync(input, 'utf-8');
 	let html = [];
 
@@ -72,7 +73,7 @@ function main(args) {
 	});
 	html.push('</div>');
 
-	let outputData = addContent(template, html.join('\n'));
+	let outputData = bundleContent(Templates, html.join('\n'));
 
 	if (!output) {
 		output = input.split('.').slice(0, -1).join('.') + '.html';
@@ -82,15 +83,35 @@ function main(args) {
 	console.log('options = ', options);
 }
 
-function pushHeading(level, content, marker = 'num') { //TODO: tags, checkboxes, counters
+function pushHeading(level, content, marker = 'num') { //TODO: checkboxes, counters, priorities
 	content = content.replace(/^\**/, '').trim();
 	let result = '<div class="title">';
 
+	//tags
 	let tagList = content.match(/:.+:$/);
 	if (tagList) {
 		content = content.replace(/:.+:$/, '');
 	}
 
+	//state of todo
+	let priority, counter;
+	let type = content.split(' ')[0];
+	let typeClass = getStateClass(type);
+	if (typeClass !== 'unknown') {
+		content = content.split(' ').slice(1).join(' ');
+
+		//priorities and counters
+		priority = content.match(/^\[.+?\]/);
+		if (priority) {
+			content = content.replace(priority, '');
+		}
+		counter = content.match(/\[.+?\]$/);
+		if (counter) {
+			content = content.replace(counter, '');
+		}
+	}
+
+	//add markers
 	if (typeof marker === 'string') {
 		if (marker === 'num') {
 			result += level + ' -';
@@ -102,15 +123,28 @@ function pushHeading(level, content, marker = 'num') { //TODO: tags, checkboxes,
 		result += marker[level-1];
 	}
 
-	let type = content.split(' ')[0];
-	let typeClass = getStateClass(type);
+	//add state
 	if (typeClass !== 'unknown') {
-		content = content.split(' ').slice(1).join(' ');
-		result += '<div class="type ' + typeClass + '">' + type + '</div><div class="content">' + content.replace(/^\**/, '').trim() + '</div>';
-	} else {
-		result += '<div class="content">' + content.replace(/^\**/, '').trim() + '</div>';
+		result += '<div class="type ' + typeClass + '">' + type + '</div>';
 	}
 
+	//add priority
+	if (priority) {
+		result += '<div class="priority">' + priority + '</div>';
+	}
+
+	//add content
+	result += '<div class="content">' + content.replace(/^\**/, '').trim() + '</div>';
+
+	//add counter
+	if (counter) {
+		result += '<div class="counter">' + counter + '</div>';
+	}
+
+	//add spacer
+	result += '<div class="spacer"></div>';
+
+	//add tags
 	if (tagList) {
 		let tags = tagList[0].split(':').slice(1, -1);
 		tags.forEach((t) => {
@@ -118,7 +152,8 @@ function pushHeading(level, content, marker = 'num') { //TODO: tags, checkboxes,
 		});
 	}
 
-	return result + '</div>';
+	result += '</div>';
+	return result;
 }
 
 function parseArguments(args) {
@@ -153,6 +188,26 @@ function parseArguments(args) {
 
 function addContent(template, content) {
 	return template.replace(/%CONTENT%/, content);
+}
+
+function addStyle(template, content) {
+	return template.replace(/%STYLES%/, content);
+}
+
+function addScripts(template, content) {
+	return template.replace(/%SCRIPTS%/, content);
+}
+
+function bundleContent(templates, html) {
+	let template = fs.readFileSync(templates.body, 'utf-8');
+	let style = fs.readFileSync(templates.css, 'utf-8');
+	let scripts = fs.readFileSync(templates.js, 'utf-8');
+
+	let outputData = addContent(template, html);
+	outputData = addStyle(outputData, style);
+	outputData = addScripts(outputData, scripts);
+
+	return outputData;
 }
 
 function isHeader(line) {
