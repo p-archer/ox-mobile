@@ -43,7 +43,8 @@ function main(args) {
 		}
 
 		// let marker = ['*', '-', '+', '='];
-		let marker = ['', '', '', '+', '-'];
+		// let marker = ['', '', '', '', ''];
+		let marker = '';
 		let newLevel = isHeader(line);
 		if (newLevel > 0) {
 			if (newLevel < level) {

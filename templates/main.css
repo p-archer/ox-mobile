@@ -6,7 +6,7 @@ body {
 .heading {
 	border-radius: 5px;
 	font-size: 18px;
-	margin: 2px 0;
+	margin: 2px 8px;
 	padding: 2px 12px;
 }
 .heading-1 {
@@ -14,19 +14,18 @@ body {
 }
 .heading-2 {
 	font-size: 28px;
-	margin-left: 8px;
 }
 .heading-3 {
 	font-size: 24px;
-	margin-left: 16px;
 }
 .heading-4 {
 	font-size: 20px;
-	margin-left: 24px;
 }
 .heading-5 {
 	font-size: 16px;
-	margin-left: 32px;
+}
+.heading:hover {
+	box-shadow: 1px 1px 1px 0px rgba(0,0,0,.24);
 }
 .heading-3:hover {
 	background-color: #ddd;
@@ -40,7 +39,7 @@ body {
 p {
 	color: rgba(0, 0, 0, 0.54);
 	font-size: 14px;
-	margin: 0 0 0 8px;
+	margin: 0 0 0 12px;
 }
 
 
@@ -101,41 +100,37 @@ p {
 
 @media (max-width: 960px) {
 	.heading {
-		margin: 2px 0;
+		margin: 2px 4px;
 		padding: 2px 0px;
 	}
 	.heading-1 {
 		font-size: 24px;
-		margin-left: 0px;
 	}
 	.heading-2 {
 		font-size: 20px;
-		margin-left: 4px;
 	}
 	.heading-3 {
 		font-size: 16px;
-		margin-left: 8px;
 	}
 	.heading-4 {
 		font-size: 12px;
-		margin-left: 12px;
 	}
 	.heading-5 {
 		font-size: 10px;
-		margin-left: 16px;
 	}
 	p {
 		font-size: 10px;
-		margin-left: 8px;
+		margin: 0 0 0 8px;
 	}
 	.heading .title .priority,
 	.heading .title .counter {
-		margin: 0 2px;
+		margin: 0 2px 0 4px;
 	}
 	.heading .title .type {
-		margin: 0;
-		padding: 0 4px;
 		font-size: 10px;
+		line-height: 12px;
+		margin: 0 2px;
+		padding: 0 4px;
 	}
 	.heading .title .tag {
 		font-size: 10px;
