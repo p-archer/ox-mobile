@@ -37,16 +37,17 @@ body {
 .heading-5:hover {
 	background-color: #bbb;
 }
-
-.heading .title {
-	align-items: center;
-	display: flex;
-}
-
 p {
 	color: rgba(0, 0, 0, 0.54);
 	font-size: 14px;
 	margin: 0 0 0 8px;
+}
+
+
+.heading .title {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .heading .title .type {
@@ -63,7 +64,7 @@ p {
 	margin: 0 6px;
 }
 .heading .title .content {
-	margin: 0 0 0 6px;
+	margin-left: 6px;
 }
 .heading .title .spacer {
 	flex-grow: 1;
@@ -89,4 +90,56 @@ p {
 	font-size: 14px;
 	margin: 0 3px;
 	padding: 3px 6px;
+}
+
+@media (min-width: 960px) {
+	body {
+		margin: 0 auto;
+		width: 960px;
+	}
+}
+
+@media (max-width: 960px) {
+	.heading {
+		margin: 2px 0;
+		padding: 2px 0px;
+	}
+	.heading-1 {
+		font-size: 24px;
+		margin-left: 0px;
+	}
+	.heading-2 {
+		font-size: 20px;
+		margin-left: 4px;
+	}
+	.heading-3 {
+		font-size: 16px;
+		margin-left: 8px;
+	}
+	.heading-4 {
+		font-size: 12px;
+		margin-left: 12px;
+	}
+	.heading-5 {
+		font-size: 10px;
+		margin-left: 16px;
+	}
+	p {
+		font-size: 10px;
+		margin-left: 8px;
+	}
+	.heading .title .priority,
+	.heading .title .counter {
+		margin: 0 2px;
+	}
+	.heading .title .type {
+		margin: 0;
+		padding: 0 4px;
+		font-size: 10px;
+	}
+	.heading .title .tag {
+		font-size: 10px;
+		padding: 0 4px;
+	}
+
 }
