@@ -84,9 +84,10 @@ function main(args) {
 	console.log('options = ', options);
 }
 
-function pushHeading(level, content, marker = 'num') { //TODO: checkboxes, counters, priorities
+function pushHeading(level, content, marker = 'num') { //TODO: checkboxes
 	content = content.replace(/^\**/, '').trim();
-	let result = '<div class="title">';
+	let tagtype = level > 3 ? 'li' : 'div';
+	let result = '<' + tagtype + ' class="title">';
 
 	//tags
 	let tagList = content.match(/:.+:$/);
@@ -126,34 +127,35 @@ function pushHeading(level, content, marker = 'num') { //TODO: checkboxes, count
 
 	//add state
 	if (typeClass !== 'unknown') {
-		result += '<div class="type ' + typeClass + '">' + type + '</div>';
+		result += '<span class="type ' + typeClass + '">' + type + '</span>';
 	}
 
 	//add priority
 	if (priority) {
-		result += '<div class="priority">' + priority + '</div>';
+		result += '<span class="priority">' + priority + '</span>';
 	}
 
 	//add content
-	result += '<div class="content">' + content.replace(/^\**/, '').trim() + '</div>';
+	// result += '<span class="content">' + content.replace(/^\**/, '').trim() + '</span>';
+	result += content.replace(/^\**/, '').trim();
 
 	//add counter
 	if (counter) {
-		result += '<div class="counter">' + counter + '</div>';
+		result += '<span class="counter">' + counter + '</span>';
 	}
 
 	//add spacer
-	result += '<div class="spacer"></div>';
+	result += '<span class="spacer"></span>';
 
 	//add tags
 	if (tagList) {
 		let tags = tagList[0].split(':').slice(1, -1);
 		tags.forEach((t) => {
-			result += '<div class="tag">' + t + '</div>';
+			result += '<span class="tag">' + t + '</span>';
 		});
 	}
 
-	result += '</div>';
+	result += '</' + tagtype + '>';
 	return result;
 }
 

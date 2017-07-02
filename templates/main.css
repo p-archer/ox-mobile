@@ -42,15 +42,11 @@ p {
 	margin: 0 0 0 12px;
 }
 
-
 .heading .title {
-	align-items: center;
-	display: flex;
-	flex-wrap: wrap;
 }
 
 .heading .title .type {
-	border-radius: 8px;
+	border-radius: 3px;
 	color: white;
 	font-size: 14px;
 	font-weight: bold;
@@ -82,7 +78,6 @@ p {
 }
 
 .heading .title .tag {
-	align-self: center;
 	background-color: #03a9f4;
 	border-radius: 16px;
 	color: #fff;
@@ -100,40 +95,44 @@ p {
 
 @media (max-width: 960px) {
 	.heading {
-		margin: 2px 4px;
+		margin: 2px 1px 2px 5px;
 		padding: 2px 0px;
 	}
 	.heading-1 {
-		font-size: 24px;
+		font-size: 26px;
 	}
 	.heading-2 {
-		font-size: 20px;
+		font-size: 24px;
 	}
 	.heading-3 {
-		font-size: 16px;
+		font-size: 20px;
 	}
 	.heading-4 {
-		font-size: 12px;
+		font-size: 16px;
 	}
 	.heading-5 {
-		font-size: 10px;
+		font-size: 14px;
 	}
 	p {
-		font-size: 10px;
+		font-size: 12px;
 		margin: 0 0 0 8px;
 	}
 	.heading .title .priority,
 	.heading .title .counter {
-		margin: 0 2px 0 4px;
+		margin: 0 2px 0 5px;
 	}
-	.heading .title .type {
-		font-size: 10px;
-		line-height: 12px;
-		margin: 0 2px;
-		padding: 0 4px;
+	.heading-4 .title .type,
+	.heading-5 .title .type {
+		font-size: 12px;
+		line-height: 14px;
+		margin: 1px 4px 1px -22px;
+		padding: 2px 4px;
+	}
+	.heading-5 .title .type {
+		margin: 1px 4px 1px -17px;
 	}
 	.heading .title .tag {
-		font-size: 10px;
+		font-size: 12px;
 		padding: 0 4px;
 	}
 
