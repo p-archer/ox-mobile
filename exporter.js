@@ -150,9 +150,11 @@ function pushHeading(level, content, marker = 'num') { //TODO: checkboxes
 	//add tags
 	if (tagList) {
 		let tags = tagList[0].split(':').slice(1, -1);
+		result += '<span class="tags">';
 		tags.forEach((t) => {
 			result += '<span class="tag">' + t + '</span>';
 		});
+		result += '</span>';
 	}
 
 	result += '</' + tagtype + '>';
